@@ -1,4 +1,4 @@
-package com.employeedatabase.backend;
+package com.employeedatabase.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
