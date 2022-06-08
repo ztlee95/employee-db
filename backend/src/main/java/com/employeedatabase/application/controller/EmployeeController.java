@@ -1,7 +1,7 @@
-package com.employeedatabase.controller;
+package com.employeedatabase.application.controller;
 
-import com.employeedatabase.model.Employee;
-import com.employeedatabase.repository.EmployeeRepository;
+import com.employeedatabase.application.model.Employee;
+import com.employeedatabase.application.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
