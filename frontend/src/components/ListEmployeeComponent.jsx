@@ -11,7 +11,9 @@ const ListEmployeeComponent = () => {
     // }
 
     useEffect(()=>{
-        getEmployees()
+        getEmployees().catch(error => {
+            console.log('Something went wrong', error)
+        })
     },[])
 
     const getEmployees = async () => {
@@ -19,7 +21,6 @@ const ListEmployeeComponent = () => {
         const data = await res.json() 
         setEmployees(data)
     }
-
     
     return (
         <div className="container">
