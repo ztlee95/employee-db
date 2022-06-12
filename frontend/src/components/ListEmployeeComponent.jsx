@@ -13,10 +13,10 @@ const ListEmployeeComponent = () => {
     // }
 
     useEffect(()=>{
-        getEmployees()
+        init()
     },[])
 
-    const getEmployees = async () => {
+    const init = async () => {
         try {
             const res = await axios.get("http://localhost:8080/api/v1/employees")
             setEmployees(res.data)
@@ -35,6 +35,16 @@ const ListEmployeeComponent = () => {
     //     const data = await res.json() 
     //     setEmployees(data)
     // }
+
+    const deleteEmployee = async (id) => {
+        try {
+            const res = await axios.delete(`http://localhost:8080/api/v1/employees/${id}`)
+            console.log('Employee deleted successfully', res.data)
+            init()
+        } catch (err) {
+            console.log(err)
+        }
+    }
     
     return (
         <div className="container">
@@ -60,7 +70,9 @@ const ListEmployeeComponent = () => {
                                     <td>{employee.email}</td>
                                     <td>
                                         <Link className="btn btn-info" to={`/update-employee/${employee.id}`}>Update</Link>
-                                        <Link className="btn btn-danger" to="" style={{marginLeft:10}}>Delete</Link>
+                                        <div className="btn btn-danger" style={{marginLeft:10}} onClick={()=>{
+                                            deleteEmployee(employee.id)
+                                        }}>Delete</div>
                                     </td>
                                 </tr>
                             ))

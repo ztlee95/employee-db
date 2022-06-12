@@ -57,7 +57,7 @@ const AddEmployeeComponent = () => {
 
   return (
     <div className="container">
-      <h3 className="mt-4">Add New Employee</h3>
+      <h3 className="mt-4">{id ? "Update Employee": "Add New Employee"}</h3>
       <hr style={{height:'2px', backgroundColor:"#080808"}}/>
       <form>
         <div className="input-group col-4 mb-3">
