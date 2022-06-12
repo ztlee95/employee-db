@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
-
+import {Link} from 'react-router-dom'
 const ListEmployeeComponent = () => {
     
     const [employees, setEmployees] = useState([])
-    const navigate = useNavigate()
+    
+    // if want useNavigate vs Link
+    // const navigate = useNavigate()
+    // const navigateAddEmployee = () => {
+    //     navigate('/add-employee')
+    // }
 
     useEffect(()=>{
         getEmployees()
@@ -16,22 +20,19 @@ const ListEmployeeComponent = () => {
         setEmployees(data)
     }
 
-    const navigateAddEmployee = () => {
-        navigate('/add-employee')
-    }
     
     return (
         <div className="container">
-            <h2 className="text-center">Employees List</h2>
-            <div><button className="btn btn-primary" onClick={navigateAddEmployee}>Add Employee</button></div>
-            <div className="row">
+            <h2 className="text-center mt-2">Employees List</h2>
+            <hr style={{height:'2px', backgroundColor:"#080808"}}/>
+            <div>
+                <Link className="btn btn-primary mb-2" to="/add-employee">Add Employee</Link>
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

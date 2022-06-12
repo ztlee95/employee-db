@@ -3,7 +3,7 @@ import React from 'react'
 const AddEmployeeComponent = () => {
   return (
     <div>
-      testing Add 
+      <h1>Add New Employee</h1>
     </div>
   )
 }
