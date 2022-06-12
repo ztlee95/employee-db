@@ -48,6 +48,7 @@ const ListEmployeeComponent = () => {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +58,10 @@ const ListEmployeeComponent = () => {
                                     <td>{employee.firstName}</td>
                                     <td>{employee.lastName}</td>
                                     <td>{employee.email}</td>
+                                    <td>
+                                        <Link className="btn btn-info" to={`/update-employee/${employee.id}`}>Update</Link>
+                                        <Link className="btn btn-danger" to="" style={{marginLeft:10}}>Delete</Link>
+                                    </td>
                                 </tr>
                             ))
                         }

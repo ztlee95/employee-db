@@ -17,6 +17,7 @@ function App() {
           <Route path="/" element={<ListEmployeeComponent/>}/>
           <Route path="/employees" element={<ListEmployeeComponent/>}/>
           <Route path="/add-employee" element={<AddEmployeeComponent/>}/>
+          <Route path="/update-employee/:id" element={<AddEmployeeComponent/>}/>
           <Route path="*" element={<NotFoundComponent/>}/>
         </Routes>
         <FooterComponent/>

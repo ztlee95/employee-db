@@ -1,17 +1,51 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+import { useParams } from 'react-router'
 
 const AddEmployeeComponent = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   
-  const submitEmployee = (e) => {
-    e.preventDefault()
-    const employee = {firstName, lastName, email} 
-    addEmployee(employee)
+  const {id} = useParams()
+  
+  useEffect(()=>{
+    if (id) {
+      getEmployee(id)
+    }
+  },[])
+
+  const getEmployee = async (id) => {
+    try {
+      const res = await axios.get(`http://localhost:8080/api/v1/employees/${id}`)
+      const employee = res.data
+      setFirstName(employee.firstName)
+      setLastName(employee.lastName)
+      setEmail(employee.email)
+    } catch(err){
+      console.log(err)
+    }
   }
 
+  const submitEmployee = (e) => {
+    e.preventDefault()
+    const employee = {firstName, lastName, email, id} 
+    if(id){
+      updateEmployee(employee)
+    }else{
+      addEmployee(employee)
+    }
+  }
+
+  const updateEmployee = async (employee) => {
+    try {
+      const res = await axios.put("http://localhost:8080/api/v1/employees", employee)
+      console.log(res.data)
+    } catch(err){
+      console.log(err)
+    }
+  }
   const addEmployee = async (employee) => {
     try {
       const res = await axios.post("http://localhost:8080/api/v1/employees", employee)
@@ -64,6 +98,7 @@ const AddEmployeeComponent = () => {
         </div>
         <div>
           <button className="btn btn-primary" onClick={submitEmployee}>Submit</button>
+          <Link className="btn btn-secondary" to="/" style={{marginLeft:10}}>Back</Link>
         </div>
       </form>
     </div>
