@@ -1,10 +1,26 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 
 const AddEmployeeComponent = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   
+  const submitEmployee = (e) => {
+    e.preventDefault()
+    const employee = {firstName, lastName, email} 
+    addEmployee(employee)
+  }
+
+  const addEmployee = async (employee) => {
+    try {
+      const res = await axios.post("http://localhost:8080/api/v1/employees", employee)
+      console.log(res.data)
+    } catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <div className="container">
       <h3 className="mt-4">Add New Employee</h3>
@@ -47,7 +63,7 @@ const AddEmployeeComponent = () => {
           /> 
         </div>
         <div>
-          <button className="btn btn-primary">Submit</button>
+          <button className="btn btn-primary" onClick={submitEmployee}>Submit</button>
         </div>
       </form>
     </div>

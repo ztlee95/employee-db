@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+
 const ListEmployeeComponent = () => {
     
     const [employees, setEmployees] = useState([])
@@ -11,16 +13,28 @@ const ListEmployeeComponent = () => {
     // }
 
     useEffect(()=>{
-        getEmployees().catch(error => {
-            console.log('Something went wrong', error)
-        })
+        getEmployees()
     },[])
 
     const getEmployees = async () => {
-        const res = await fetch("http://localhost:8080/api/v1/employees")
-        const data = await res.json() 
-        setEmployees(data)
+        try {
+            const res = await axios.get("http://localhost:8080/api/v1/employees")
+            setEmployees(res.data)
+        } catch (err) {
+            console.log(err)
+        }
     }
+
+    // if using fetch api 
+    // const getEmployees = async () => {
+    //     const res = await fetch("http://localhost:8080/api/v1/employees")
+    //     if(!res.ok) {
+    //         const msg = `An error has occured: ${res.status}`
+    //         throw new Error(msg)
+    //     }
+    //     const data = await res.json() 
+    //     setEmployees(data)
+    // }
     
     return (
         <div className="container">
