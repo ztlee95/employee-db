@@ -21,9 +21,19 @@ public class EmployeeController {
         return employeeRepository.findAll();
     }
 
+    // Get employee by Id
+    @GetMapping("/employees/{id}")
+    public Employee getEmployeeById(@PathVariable Long id){
+        return employeeRepository.findById(id).get();
+    }
     // Add employee
     @PostMapping("/employees")
     public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee employee) {
         return employeeRepository.save(employee);
     }
 }
