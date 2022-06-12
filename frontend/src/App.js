@@ -6,6 +6,7 @@ import ListEmployeeComponent from './components/ListEmployeeComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import AddEmployeeComponent from './components/AddEmployeeComponent';
+import NotFoundComponent from './components/NotFoundComponent';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/" element={<ListEmployeeComponent/>}/>
           <Route path="/employees" element={<ListEmployeeComponent/>}/>
           <Route path="/add-employee" element={<AddEmployeeComponent/>}/>
-          <Route path="/*" element={<AddEmployeeComponent/>}/>
+          <Route path="*" element={<NotFoundComponent/>}/>
         </Routes>
         <FooterComponent/>
       </Router>
