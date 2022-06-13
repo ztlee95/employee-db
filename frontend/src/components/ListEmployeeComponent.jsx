@@ -5,40 +5,25 @@ import axios from 'axios'
 const ListEmployeeComponent = () => {
     
     const [employees, setEmployees] = useState([])
-    
-    // if want useNavigate vs Link
-    // const navigate = useNavigate()
-    // const navigateAddEmployee = () => {
-    //     navigate('/add-employee')
-    // }
 
     useEffect(()=>{
         init()
     },[])
 
+    const API = 'http://employeemanagementapp-env.eba-chphimsc.ap-southeast-1.elasticbeanstalk.com/api/v1/employees'
+    
     const init = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/api/v1/employees")
+            const res = await axios.get(API)
             setEmployees(res.data)
         } catch (err) {
             console.log(err)
         }
     }
 
-    // if using fetch api 
-    // const getEmployees = async () => {
-    //     const res = await fetch("http://localhost:8080/api/v1/employees")
-    //     if(!res.ok) {
-    //         const msg = `An error has occured: ${res.status}`
-    //         throw new Error(msg)
-    //     }
-    //     const data = await res.json() 
-    //     setEmployees(data)
-    // }
-
     const deleteEmployee = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:8080/api/v1/employees/${id}`)
+            const res = await axios.delete(API+`/${id}`)
             console.log('Employee deleted successfully', res.data)
             init()
         } catch (err) {

@@ -10,15 +10,20 @@ const AddEmployeeComponent = () => {
   
   const {id} = useParams()
   
+  const [submitted, setSubmitted] = useState(false)
+
   useEffect(()=>{
     if (id) {
       getEmployee(id)
     }
   },[])
-
+  
+  const API = 'http://employeemanagementapp-env.eba-chphimsc.ap-southeast-1.elasticbeanstalk.com/api/v1/employees'
+  
   const getEmployee = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:8080/api/v1/employees/${id}`)
+      // const res = await axios.get(`http://localhost:8080/api/v1/employees/${id}`)
+      const res = await axios.get(API+`/${id}`)
       const employee = res.data
       setFirstName(employee.firstName)
       setLastName(employee.lastName)
@@ -40,7 +45,9 @@ const AddEmployeeComponent = () => {
 
   const updateEmployee = async (employee) => {
     try {
-      const res = await axios.put("http://localhost:8080/api/v1/employees", employee)
+      // const res = await axios.put("http://localhost:8080/api/v1/employees", employee)
+      const res = await axios.put(API, employee)
+      setSubmitted(true)
       console.log(res.data)
     } catch(err){
       console.log(err)
@@ -48,7 +55,9 @@ const AddEmployeeComponent = () => {
   }
   const addEmployee = async (employee) => {
     try {
-      const res = await axios.post("http://localhost:8080/api/v1/employees", employee)
+      // const res = await axios.post("http://localhost:8080/api/v1/employees", employee)
+      const res = await axios.post(API, employee)
+      setSubmitted(true)
       console.log(res.data)
     } catch(err){
       console.log(err)
@@ -99,6 +108,7 @@ const AddEmployeeComponent = () => {
         <div>
           <button className="btn btn-primary" onClick={submitEmployee}>Submit</button>
           <Link className="btn btn-secondary" to="/" style={{marginLeft:10}}>Back</Link>
+          <div style={{color:"green"}}>{submitted ? "Submitted" : ""}</div>
         </div>
       </form>
     </div>
